@@ -6,8 +6,8 @@ request(url, (err, response, body) => {
   const data = JSON.parse(body).results;
   const idWedgeAntilles = '18';
   let count = 0;
-  for (const property of data) {
-    if (property.characters.includes(`https://swapi-api.hbtn.io/api/people/${idWedgeAntilles}/`)) count += 1;
+  for (const film of data) {
+    if (film.characters.includes(`https://swapi-api.hbtn.io/api/people/${idWedgeAntilles}/`)) count++;
   }
   console.log(count);
 });
