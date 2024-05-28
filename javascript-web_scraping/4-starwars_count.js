@@ -4,8 +4,9 @@ const request = require('request');
 request(url, (err, response, body) => {
   if (err) throw err;
   const data = JSON.parse(body).results;
-  const idWedgeAntilles = 'https://swapi-api.hbtn.io/api/people/18/';
   let count = 0;
-  for (const property of data) if (property.characters.includes(idWedgeAntilles)) count++;
-  console.log(count);
+  data.filter(dt => {
+    for (char of dt.characters) if (char.includes('/18/')) count++;
+  })
+  console.log(count)
 });
