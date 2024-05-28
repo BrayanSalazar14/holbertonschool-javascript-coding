@@ -6,7 +6,8 @@ request(url, (err, response, body) => {
   const data = JSON.parse(body).results;
   let count = 0;
   data.filter(dt => {
-    for (char of dt.characters) if (char.includes('/18/')) count++;
-  })
-  console.log(count)
+    for (const char of dt.characters) if (char.includes('/18/')) count++;
+    return count;
+  });
+  console.log(count);
 });
