@@ -5,13 +5,15 @@ const request = require('request');
 request(url, (err, response, body) => {
   if (err) throw err;
   const dataApi = JSON.parse(body).characters;
-  const arr = []
-  for (const data of dataApi) {
-    request(data, (err, response, body) => {
-      if (err) throw err;
-      const character = JSON.parse(body).name;
-      arr.push(character);
+  // Crear un array de promesas
+  const promises = dataApi.map(data => {
+    return new Promise((resolve, reject) => {
+      request(data, (err, response, body) => {
+        if (err) return reject(err);
+        const character = JSON.parse(body).name;
+        resolve(character);
+      });
     });
-  }
-  for (const i of arr) console.log(i)
+  });
+  Promise.all(promises).then(characters => characters.forEach(character => console.log(character)));
 });
