@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-function countStudents(file) {
+function countStudents (file) {
   return new Promise((resolve, reject) => {
     fs.readFile(file, 'utf-8')
       .then((data) => {
@@ -26,4 +26,3 @@ function countStudents(file) {
 }
 
 module.exports = countStudents;
-
