@@ -9,7 +9,6 @@ const app = createServer((req, res) => {
     res.statusCode = 200;
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
-    res.statusCode = 200;
     const response = [];
     response.push('This is the list of our students');
     const data = fs.readFileSync(process.argv[2], 'utf-8');
@@ -26,7 +25,11 @@ const app = createServer((req, res) => {
     }
     response.push(`Number of students in CS: ${studentsCs.length}. List: ${studentsCs.join(', ')}`);
     response.push(`Number of students in SWE: ${studentsSwe.length}. List: ${studentsSwe.join(', ')}`);
+    res.statusCode = 200;
     res.end(response.join('\n'));
+  } else {
+    res.statusCode = 404;
+    res.end('Not Found');
   }
 });
 
