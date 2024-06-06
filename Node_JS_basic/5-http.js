@@ -13,8 +13,7 @@ const app = createServer((req, res) => {
     fs.readFile(process.argv[2], 'utf-8', (err, data) => {
       if (err) {
         res.statusCode = 500;
-        response.push('Cannot load the database');
-        res.end(response.join('\n'));
+        res.end('This is the list of our students\nCannot load the database');
         return;
       }
       const lines = data.trim().split('\n');
