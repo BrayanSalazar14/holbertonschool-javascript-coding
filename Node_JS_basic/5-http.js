@@ -17,14 +17,16 @@ const app = createServer((req, res) => {
         return;
       }
       const lines = data.trim().split('\n');
-      response.push(`Number of students: ${lines.length - 1}`);
+      const studentData = lines.slice(1); // Excluir la primera línea (encabezado)
+      response.push(`Number of students: ${studentData.length}`);
       const studentsCs = [];
       const studentsSwe = [];
-      for (const index of lines) {
-        if (index.includes('CS')) {
-          studentsCs.push(index.slice(0, index.indexOf(',')));
-        } else if (index.includes('SWE')) {
-          studentsSwe.push(index.slice(0, index.indexOf(',')));
+      for (const line of studentData) {
+        const [name, , , field] = line.split(',');
+        if (field === 'CS') {
+          studentsCs.push(name);
+        } else if (field === 'SWE') {
+          studentsSwe.push(name);
         }
       }
       response.push(`Number of students in CS: ${studentsCs.length}. List: ${studentsCs.join(', ')}`);
