@@ -13,7 +13,8 @@ const app = createServer((req, res) => {
     fs.readFile(process.argv[2], 'utf-8', (err, data) => {
       if (err) {
         res.statusCode = 500;
-        res.end('Cannot load the database');
+        response.push('Cannot load the database');
+        res.end(response.join('\n'));
         return;
       }
       const lines = data.trim().split('\n');
@@ -39,6 +40,13 @@ const app = createServer((req, res) => {
     res.end('Not Found');
   }
 });
+
+/* eslint-disable */
+app.listen(port, () => {
+  console.log('Server is listening on port 1245');
+});
+module.exports = app;
+
 
 /* eslint-disable */
 app.listen(port, () => {
