@@ -46,10 +46,3 @@ app.listen(port, () => {
   console.log('Server is listening on port 1245');
 });
 module.exports = app;
-
-
-/* eslint-disable */
-app.listen(port, () => {
-  console.log('Server is listening on port 1245');
-});
-module.exports = app;
