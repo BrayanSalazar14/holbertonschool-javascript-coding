@@ -5,8 +5,8 @@ const port = 1245;
 
 /* eslint-disable */
 app.get('/', (req, res) => {
-  res.statusCode = 200;
   res.send('Hello Holberton School!');
+  return res.sendStatus(200);
 });
 
 app.listen(port);
