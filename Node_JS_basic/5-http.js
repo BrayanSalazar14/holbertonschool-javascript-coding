@@ -9,10 +9,14 @@ const app = createServer((req, res) => {
     res.statusCode = 200;
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
-    try {
-      const response = [];
+    const response = [];
+    fs.readFile(process.argv[2], 'utf-8', (err, data) => {
+      if (err) {
+        res.statusCode = 500;
+        res.end('Cannot load the database');
+        return;
+      }
       response.push('This is the list of our students');
-      const data = fs.readFile(process.argv[2], 'utf-8');
       const lines = data.trim().split('\n');
       response.push(`Number of students: ${lines.length - 1}`);
       const studentsCs = [];
@@ -28,13 +32,7 @@ const app = createServer((req, res) => {
       response.push(`Number of students in SWE: ${studentsSwe.length}. List: ${studentsSwe.join(', ')}`);
       res.statusCode = 200;
       res.end(response.join('\n'));
-    } catch (error) {
-      res.statusCode = 500;
-      res.end('Cannot load the database');
-    }
-  } else {
-    res.statusCode = 404;
-    res.end('Not Found');
+    });
   }
 });
 
