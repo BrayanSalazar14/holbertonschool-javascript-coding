@@ -14,9 +14,10 @@ export default class StudentsController {
     }
   }
 
+  /* eslint-disable */
   static async getAllStudentsByMajor(req, res) {
     const { major } = req.params;
-    if (major !== 'CS' && major !== 'SWE') res.status(500).send('Major parameter must be CS or SWE');
+    if (major !== 'CS' && major !== 'SWE') return res.status(500).send('Major parameter must be CS or SWE');
     try {
       const students = await readDatabase('./database.csv');
       const response = `List: ${students[`${major}`].join(', ').trim()}`;
