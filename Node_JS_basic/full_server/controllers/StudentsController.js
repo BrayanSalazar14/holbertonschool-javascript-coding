@@ -1,5 +1,6 @@
 import readDatabase from '../utils';
 
+/* eslint-disable */
 export default class StudentsController {
   static async getAllStudents(req, res) {
     try {
@@ -10,7 +11,7 @@ export default class StudentsController {
       });
       res.status(200).send(response.trim());
     } catch (error) {
-      res.status(500).send(error.message);
+      return res.status(500).send(error.message);
     }
   }
 
@@ -19,11 +20,11 @@ export default class StudentsController {
     const { major } = req.params;
     if (major !== 'CS' && major !== 'SWE') return res.status(500).send('Major parameter must be CS or SWE');
     try {
-      const students = await readDatabase('./database.csv');
+      const students = await readDatabase('./daabase.csv');
       const response = `List: ${students[`${major}`].join(', ').trim()}`;
       res.status(200).send(response);
     } catch (err) {
-      res.status(500).send(err.message);
+      return res.status(500).send(err.message);
     }
   }
 }
