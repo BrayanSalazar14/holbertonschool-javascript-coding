@@ -11,11 +11,11 @@ function cvsToJson(file) {
     const rows = data.split('\n');
     const headers = rows[0].split(',');
 
-    for (let i = 1; i < rows.length; i++) {
+    for (let i = 1; i < rows.length; i += 1) {
       const values = rows[i].split(',');
       const object = {};
 
-      for (let j = 0; j < headers.length; j++) {
+      for (let j = 0; j < headers.length; j += 1) {
         const key = headers[j];
         const value = values[j];
         object[key] = value;
@@ -46,11 +46,9 @@ app.get('/students', (req, res) => {
     response.push(`Number of students: ${jsonData.length}`);
     response.push(`Number of students in CS: ${studentsCs.length}. List: ${studentsCs.join(', ')}`);
     response.push(`Number of students in SWE: ${studentsSwe.length}. List: ${studentsSwe.join(', ')}`);
-    res.send(response.join('\n'));
-    return res.sendStatus(200);
+    res.status(200).send(response.join('\n'));
   } catch (error) {
-    res.send('This is the list of our students\nCannot load the database');
-    res.sendStatus(500);
+    res.status(500).send('This is the list of our students\nCannot load the database');
   }
 });
 
