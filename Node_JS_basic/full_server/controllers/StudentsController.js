@@ -4,7 +4,7 @@ export default class StudentsController {
   static async getAllStudents(req, res) {
     try {
       let response = 'This is the list of our students\n';
-      const student = await readDatabase('./datbase.csv');
+      const student = await readDatabase('./database.csv');
       Object.entries(student).forEach(([key, value]) => {
         response += `Number of students in ${key}: ${student[key].length}. List: ${value.join(', ')}\n`;
       });
