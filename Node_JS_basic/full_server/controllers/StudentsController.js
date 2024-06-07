@@ -4,13 +4,13 @@ export default class StudentsController {
   static async getAllStudents(req, res) {
     try {
       let response = 'This is the list of our students\n';
-      const student = await readDatabase('./database.csv');
+      const student = await readDatabase('./dataase.csv');
       Object.entries(student).forEach(([key, value]) => {
         response += `Number of students in ${key}: ${student[key].length}. List: ${value.join(', ')}\n`;
       });
       res.status(200).send(response.trim());
     } catch (error) {
-      res.status(500).send(error);
+      res.status(500).send('Cannot load the database');
     }
   }
 
@@ -22,7 +22,7 @@ export default class StudentsController {
       const response = `List: ${students[`${major}`].join(', ').trim()}`;
       res.status(200).send(response);
     } catch (err) {
-      res.status(500).send(err);
+      res.status(500).send('Cannot load the database');
     }
   }
 }
